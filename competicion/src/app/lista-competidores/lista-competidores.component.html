@@ -1,0 +1,42 @@
+<div class="contenedor mb-5">
+  <h2 class="text-center">Lista de Competidores</h2>
+  <div class="table-wrapper">
+    <table class="styled-table">
+      <thead class="thead-dark">
+        <tr>
+          <th class="text-start">Nombre</th>
+          <th class="text-start">Email</th>
+          <th class="text-start">Centro</th>
+          <th class="text-start">Especialidad</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let competidor of competidoresPaginados">
+          <td class="text-start">{{ competidor.nombre }} {{ competidor.apellidos }}</td>
+          <td class="text-start">{{ competidor.email }}</td>
+          <td class="text-start">{{ competidor.centro }}</td>
+          <td class="text-start">{{ competidor.especialidad }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Controles de Paginación -->
+  <div class="pagination-controls mt-3 text-center">
+    <button 
+      class="btn btn-outline-primary btn-sm me-2"
+      [disabled]="paginaActual === 1"
+      (click)="cambiarPagina(paginaActual - 1)"
+    >
+      Anterior
+    </button>
+    <span class="mx-2">Página {{ paginaActual }} de {{ totalPaginas }}</span>
+    <button 
+      class="btn btn-outline-primary btn-sm ms-2"
+      [disabled]="paginaActual === totalPaginas"
+      (click)="cambiarPagina(paginaActual + 1)"
+    >
+      Siguiente
+    </button>
+  </div>
+</div>

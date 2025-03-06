@@ -1,0 +1,164 @@
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-12">
+      <h2 class="mb-4">Listado de Expertos</h2>
+      <!-- Botón para agregar un nuevo experto -->
+      <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#modalExperto"
+        (click)="crearExperto()">
+        Agregar Nuevo Experto
+      </button>
+      <div class="table-responsive">
+        <table class="table table-striped table-bordered">
+          <thead class="table-dark">
+            <tr>
+              <th>Nombre</th>
+              <th>Apellidos</th>
+              <th>Username</th>
+              <th>DNI</th>
+              <th>Especialidad</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let experto of expertosPorPagina">
+              <td>{{ experto.nombre }}</td>
+              <td>{{ experto.apellidos }}</td>
+              <td>{{ experto.username }}</td>
+              <td>{{ experto.dni }}</td>
+              <td>{{ experto.especialidad }}</td>
+              <td>
+                <!-- Botón para abrir el modal de modificación -->
+                <button class="btn btn-warning btn-sm me-2" (click)="abrirModal(experto)">Modificar</button>
+                <button class="btn btn-danger btn-sm" (click)="eliminarExperto(experto)">Eliminar</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Paginación -->
+<div class="d-flex justify-content-center mt-3">
+  <button class="btn btn-outline-primary btn-sm me-2" (click)="cambiarPagina(paginaActual - 1)"
+    [disabled]="paginaActual === 1">
+    Anterior
+  </button>
+  <span class="mx-2">Página {{ paginaActual }} de {{ totalPaginas }}</span>
+  <button class="btn btn-outline-primary btn-sm ms-2" (click)="cambiarPagina(paginaActual + 1)"
+    [disabled]="paginaActual === totalPaginas">
+    Siguiente
+  </button>
+</div>
+
+
+
+
+<!-- Modal de modificación con Bootstrap -->
+<div class="modal fade" id="modalModificar" tabindex="-1" aria-labelledby="modalModificarLabel" aria-hidden="true"
+  *ngIf="mostrarModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalModificarLabel">Modificar Experto</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"
+          (click)="cerrarModal()"></button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="modificarExperto(experto)">
+          <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre:</label>
+            <input type="text" id="nombre" [(ngModel)]="experto.nombre" name="nombre" class="form-control" required />
+          </div>
+
+          <div class="mb-3">
+            <label for="apellidos" class="form-label">Apellidos:</label>
+            <input type="text" id="apellidos" [(ngModel)]="experto.apellidos" name="apellidos" class="form-control"
+              required />
+          </div>
+
+          <div class="mb-3">
+            <label for="username" class="form-label">Username:</label>
+            <input type="text" id="username" [(ngModel)]="experto.username" name="username" class="form-control"
+              required />
+          </div>
+
+          <div class="mb-3">
+            <label for="dni" class="form-label">DNI:</label>
+            <input type="text" id="dni" [(ngModel)]="experto.dni" name="dni" class="form-control" required
+              pattern="[0-9]{8}[A-Za-z]{1}" title="DNI debe tener 8 dígitos seguidos de una letra." />
+          </div>
+
+          <div class="mb-3">
+            <label for="especialidad" class="form-label">Especialidad:</label>
+            <select id="especialidad" [(ngModel)]="experto.especialidad" name="especialidad" class="form-select"
+              required>
+              <option *ngFor="let especialidad of especialidades" [value]="especialidad.nombre">
+                {{ especialidad.nombre }}
+              </option>
+            </select>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Modificar</button>
+          <button type="button" class="btn btn-secondary" (click)="cerrarModal()">Cancelar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- Modal para agregar un nuevo experto -->
+<div class="modal fade" id="modalExperto" tabindex="-1" aria-labelledby="modalExpertoLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalExpertoLabel">Agregar Nuevo Experto</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form #expertoForm="ngForm" (ngSubmit)="crearExperto()">
+          <!-- Campos para datos del experto -->
+          <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="nombre" [(ngModel)]="experto.nombre" name="nombre" required>
+          </div>
+          <div class="mb-3">
+            <label for="apellidos" class="form-label">Apellidos</label>
+            <input type="text" class="form-control" id="apellidos" [(ngModel)]="experto.apellidos" name="apellidos"
+              required>
+          </div>
+          <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" class="form-control" id="username" [(ngModel)]="experto.username" name="username"
+              required>
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Contraseña</label>
+            <input type="password" class="form-control" id="password" [(ngModel)]="experto.password" name="password"
+              required>
+          </div>
+          <div class="mb-3">
+            <label for="dni" class="form-label">DNI</label>
+            <input type="text" class="form-control" id="dni" [(ngModel)]="experto.dni" name="dni" required
+              pattern="[0-9]{8}[A-Za-z]{1}" title="DNI debe tener 8 dígitos seguidos de una letra." />
+          </div>
+
+          <!-- Select para elegir especialidad -->
+          <div class="mb-3">
+            <label for="especialidadSelect" class="form-label">Especialidad</label>
+            <select class="form-select" id="especialidadSelect" [(ngModel)]="experto.especialidad" name="especialidad"
+              required>
+              <option value="" disabled selected>Seleccione una especialidad</option>
+              <option *ngFor="let esp of especialidades" [ngValue]="esp">{{ esp.nombre }}</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-success">Crear Experto</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

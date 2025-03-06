@@ -1,0 +1,10 @@
+/* src/styles.css */
+body {
+    background-color: #f1f1f1; /* Gris clarito */
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+#cuerpoPrincipal {
+    margin-bottom: 150px;
+}

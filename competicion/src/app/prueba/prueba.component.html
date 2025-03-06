@@ -1,0 +1,84 @@
+<div class="container mt-5">
+  <h2>Crear Prueba</h2>
+  <form (ngSubmit)="crearPrueba()" #pruebaForm="ngForm">
+    <div class="form-group mb-3">
+      <label for="enunciado">Enunciado:</label>
+      <input type="text" class="form-control" id="enunciado" name="enunciado" [(ngModel)]="prueba.enunciado" required
+        placeholder="Escribe el enunciado de la prueba">
+    </div>
+    <div class="form-group mb-3">
+      <label for="puntuacionMaxima">Puntuación Máxima:</label>
+      <input type="number" class="form-control" id="puntuacionMaxima" name="puntuacionMaxima"
+        [(ngModel)]="prueba.puntuacionMaxima" [value]="10" readonly required placeholder="10">
+    </div>
+    <div class="form-group mb-3">
+      <label for="nombreEspecialidad">Especialidad:</label>
+      <input type="text" class="form-control" id="nombreEspecialidad" name="nombreEspecialidad"
+        [(ngModel)]="especialidad" readonly required placeholder="Especialidad del usuario">
+    </div>
+
+    <!-- Botón para abrir el modal -->
+    <button type="button" class="btn btn-primary mb-2" (click)="abrirModal()" [disabled]="itemsList.length === 10">
+      Añadir items
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalItems" tabindex="-1" aria-labelledby="modalItemsLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalItemsLabel">Items</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+          </div>
+          <div class="modal-body">
+            <form #itemsForm="ngForm">
+              <label>Item 1:</label>
+              <input type="text" class="form-control" [(ngModel)]="itemsTemp[0]" name="item{{0}}" required>
+              <label>Item 2:</label>
+              <input type="text" class="form-control" [(ngModel)]="itemsTemp[1]" name="item{{1}}" required>
+              <label>Item 3:</label>
+              <input type="text" class="form-control" [(ngModel)]="itemsTemp[2]" name="item{{2}}" required>
+              <label>Item 4:</label>
+              <input type="text" class="form-control" [(ngModel)]="itemsTemp[3]" name="item{{3}}" required>
+              <label>Item 5:</label>
+              <input type="text" class="form-control" [(ngModel)]="itemsTemp[4]" name="item{{4}}" required>
+              <label>Item 6:</label>
+              <input type="text" class="form-control" [(ngModel)]="itemsTemp[5]" name="item{{5}}" required>
+              <label>Item 7:</label>
+              <input type="text" class="form-control" [(ngModel)]="itemsTemp[6]" name="item{{6}}" required>
+              <label>Item 8:</label>
+              <input type="text" class="form-control" [(ngModel)]="itemsTemp[7]" name="item{{7}}" required>
+              <label>Item 9:</label>
+              <input type="text" class="form-control" [(ngModel)]="itemsTemp[8]" name="item{{8}}" required>
+              <label>Item 10:</label>
+              <input type="text" class="form-control" [(ngModel)]="itemsTemp[9]" name="item{{9}}" required>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <button type="button" class="btn btn-primary" (click)="crearItems()" [disabled]="!itemsForm.form.valid">
+              Guardar Items
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lista de Items -->
+    <div class="row">
+      <div class="col-12 col-md-6" *ngFor="let item of itemsList; let i = index">
+        <div class="card bg-light mb-3">
+          <div class="card-header">Item {{ i + 1 }}</div>
+          <div class="card-body">
+            <p class="card-text">{{ item.descripcion }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Botón de Crear Prueba -->
+    <button type="submit" class="btn btn-primary" [disabled]="!pruebaForm.form.valid || itemsList.length !== 10">
+      Crear prueba
+    </button>
+  </form>
+</div>

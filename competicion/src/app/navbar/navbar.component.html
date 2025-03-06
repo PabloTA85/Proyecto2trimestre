@@ -1,0 +1,65 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <!-- Menú de administración -->
+            <ul class="navbar-nav">
+                <li class="nav-item" *ngIf="loginService.isAdmin()" routerLinkActive="active">
+                    <button class="btn btn-outline-light me-2" (click)="mostrarExpertos()">
+                        Experto
+                    </button>
+                </li>
+                <li class="nav-item" *ngIf="loginService.isAdmin()" routerLinkActive="active">
+                    <button class="btn btn-outline-light me-2" (click)="mostrarEspecialidad()">
+                        Especialidad
+                    </button>
+                </li>
+                <li class="nav-item" *ngIf="loginService.isAdmin()" routerLinkActive="active">
+                    <button class="btn btn-outline-light me-2" (click)="mostrarParticipantes()">
+                        Participante
+                    </button>
+                </li>
+            </ul>
+
+            <!-- Menú para expertos -->
+            <ul class="navbar-nav">
+                <li class="nav-item" *ngIf="loginService.isExperto()" routerLinkActive="active">
+                    <button class="btn btn-outline-light me-2" (click)="mostrarEspecialidadesExperto()">Especialidades</button>
+                </li>
+                <li class="nav-item" *ngIf="loginService.isExperto()" routerLinkActive="active">
+                    <button class="btn btn-outline-light me-2" (click)="mostrarParticipantesExperto()">Participantes</button>
+                </li>
+                <li class="nav-item" *ngIf="loginService.isExperto()" routerLinkActive="active">
+                    <button class="btn btn-outline-light me-2" (click)="mostrarEvaluacion()">Evaluacion</button>
+                </li>
+                <li class="nav-item" *ngIf="loginService.isExperto()" routerLinkActive="active">
+                    <button class="btn btn-outline-light me-2" (click)="mostrarPruebas()">Pruebas</button>
+                </li>
+                <li class="nav-item" *ngIf="loginService.isExperto()" routerLinkActive="active">
+                    <button class="btn btn-outline-light me-2" (click)="mostrarItems()">Item</button>
+                </li>
+                <li class="nav-item" *ngIf="loginService.isExperto()" routerLinkActive="active">
+                    <button class="btn btn-outline-light me-2" (click)="mostrarNotas()">Notas</button>
+                </li>
+            </ul>
+
+            <!-- Controles de Login/Logout -->
+            <div class="d-flex ms-auto">
+                <ul class="navbar-nav">
+                    <li *ngIf="islogged()" class="nav-item">
+                        <span class="navbar-text text-white">{{ getNombre() }}</span>
+                    </li>
+                    <li *ngIf="islogged()" class="nav-item">
+                        <button class="btn btn-outline-light btn-sm" (click)="logout()">LOGOUT</button>
+                    </li>
+                    <li *ngIf="!islogged()" class="nav-item">
+                        <button class="btn btn-outline-light btn-sm" (click)="login()">LOGIN</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>

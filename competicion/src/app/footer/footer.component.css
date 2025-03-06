@@ -1,0 +1,18 @@
+/* Estilo del Footer */
+#footer {
+    position: fixed; /* Fija el footer al fondo */
+    bottom: 0; /* Colócalo en la parte inferior */
+    left: 0; /* Alineado a la izquierda */
+    width: 100%; /* Asegura que ocupe todo el ancho */
+    background-color: #343a40; /* Color de fondo */
+    color: white; /* Color del texto */
+    text-align: center; /* Centra el texto */
+    padding: 15px 0; /* Añade un poco de padding */
+    z-index: 1000; /* Asegura que el footer esté encima de otros elementos */
+  }
+  
+  /* Espaciado del contenido principal */
+  body {
+    padding-bottom: 60px; /* Asegura que el contenido no se superponga al footer */
+  }
+  

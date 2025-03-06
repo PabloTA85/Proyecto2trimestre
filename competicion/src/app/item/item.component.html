@@ -1,0 +1,55 @@
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12">
+            <!-- Card envolvente -->
+            <div class="card shadow-lg rounded">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="mb-0">Listado de Especialidades</h2>
+                </div>
+                <!-- Botón Nuevo -->
+                <div>
+
+                    <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#modalFormulario">
+                        Nuevo
+                    </button>
+
+                    <!-- Tabla -->
+                    <table class="table table-striped">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaBody">
+                            <!-- Se llenará dinámicamente con JavaScript -->
+                        </tbody>
+                    </table>
+
+                    <!-- Modal para Agregar/Editar -->
+                    <div class="modal fade" id="modalFormulario" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Agregar / Editar</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form id="formulario">
+                                        <input type="hidden" id="inputId">
+                                        <div class="mb-3">
+                                            <label for="inputNombre" class="form-label">Nombre</label>
+                                            <input type="text" class="form-control" id="inputNombre" required>
+                                        </div>
+                                        <button type="submit" class="btn btn-success">Guardar</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

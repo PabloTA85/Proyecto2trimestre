@@ -1,0 +1,155 @@
+/* Estilo personalizado para el modal */
+.custom-modal-width {
+    max-width: 80% !important;
+    /* Hace que el modal sea más ancho */
+}
+
+/* Estilo para la tabla en el modal */
+.table {
+    width: 100%;
+    margin-top: 10px;
+    border-collapse: collapse;
+}
+
+/* Cabecera de la tabla */
+.table thead {
+    background-color: #f8f9fa;
+    /* Fondo claro para el encabezado */
+}
+
+.table th {
+    font-weight: bold;
+    color: #495057;
+    text-align: center;
+}
+
+/* Filas de la tabla */
+.table tbody tr {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.table td,
+.table th {
+    padding: 10px;
+    border: 1px solid #dee2e6;
+}
+
+/* Cambiar el color de la fila cuando el mouse pasa sobre ella */
+.table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Estilo para el selector de grados de consecución */
+.grado-selector {
+    display: flex;
+    justify-content: space-around;
+}
+
+.grado-option {
+    text-align: center;
+    margin-right: 10px;
+}
+
+/* Estilo para los botones de radio */
+.grado-option input[type="radio"] {
+    display: none;
+}
+
+.grado-label {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #f0f0f0;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.grado-label:hover {
+    background-color: #d1e7dd;
+}
+
+.grado-option input[type="radio"]:checked+.grado-label {
+    background-color: #28a745;
+    /* Verde cuando está seleccionado */
+    color: white;
+    border: 2px solid #28a745;
+}
+
+.grado-option input[type="radio"]:checked+.grado-label:hover {
+    background-color: #218838;
+}
+
+/* Estilo para los selects dentro de la tabla */
+.table select {
+    width: auto;
+    min-width: 120px;
+    padding: 5px;
+}
+
+/* Botones del modal */
+.modal-footer {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+/* Estilo para el encabezado del modal */
+.modal-header {
+    display: flex;
+    justify-content: center;
+    /* Centra el contenido horizontalmente */
+    text-align: center;
+    /* Asegura que el texto esté centrado */
+    padding: 20px;
+}
+
+/* Estilo del título del modal */
+.modal-title {
+    font-size: 1.5rem;
+    /* Aumenta el tamaño de la fuente */
+    font-weight: bold;
+    /* Hace que el texto sea más prominente */
+    color: #495057;
+    /* Un color suave para el texto */
+    text-transform: uppercase;
+    /* Opcional, para que el texto se vea más fuerte */
+}
+
+/* Ajustar los botones de cerrar en el encabezado */
+.modal-header .btn-close {
+    margin-left: auto;
+    /* Asegura que el botón de cerrar esté alineado a la derecha */
+}
+
+.card {
+    max-width: 600px; /* Limita el ancho */
+    margin: 0 auto; /* Centra las tarjetas */
+    padding: 10px; /* Reduce el espacio interno */
+  }
+  
+  .card-header h3 {
+    font-size: 1.2rem; /* Reduce el tamaño del título */
+    margin-bottom: 5px;
+  }
+  
+  .card-body {
+    font-size: 0.9rem; /* Reduce el tamaño del texto dentro de la tarjeta */
+    padding: 10px;
+  }
+  
+  .accordion-button {
+    font-size: 0.9rem; /* Reduce el tamaño del botón de acordeón */
+    padding: 8px;
+  }
+  
+  .accordion-body {
+    padding: 8px; /* Reduce el espacio dentro del acordeón */
+  }
+  
+  .btn {
+    font-size: 0.9rem; /* Hace que los botones sean más pequeños */
+    padding: 6px 12px;
+  }
+  

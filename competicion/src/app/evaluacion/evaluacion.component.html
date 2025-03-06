@@ -1,0 +1,193 @@
+<div class="container mt-5 mb-5">
+
+  <!-- Mostrar mensaje de error si existe -->
+  <div *ngIf="errorMessage" class="alert alert-danger shadow-sm rounded">
+    {{ errorMessage }}
+  </div>
+
+  <!-- Mostrar todas las pruebas -->
+  <div *ngIf="pruebas && pruebas.length > 0" class="row">
+    <div *ngFor="let prueba of pruebas" class="col-12 col-md-6 mb-4">
+      <div class="card shadow-lg rounded">
+        <div class="card-header bg-primary text-white">
+          <h3>{{ prueba.enunciado }}</h3>
+        </div>
+        <div class="card-body">
+          <p><strong>Puntuación máxima:</strong> {{ prueba.puntuacionMaxima }}</p>
+
+          <!-- Enlace para ver el PDF -->
+          <a href="http://localhost:8080/uploads/Motores%20de%20combustión.pdf" target="_blank"
+            class="btn btn-primary mb-3">
+            Ver PDF
+          </a>
+
+          <!-- Botón de evaluar participante -->
+          <button class="btn btn-success mt-3 mb-3 ml-auto d-block" (click)="seleccionarPrueba(prueba)">
+            Ver Participantes
+          </button>
+
+          <!-- Acordeón de ítems -->
+          <div class="accordion" id="accordion{{ prueba.idPrueba }}">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="heading{{ prueba.idPrueba }}">
+                <button class="accordion-button" type="button" (click)="toggleCollapse(prueba.idPrueba)">
+                  Ver Ítems
+                </button>
+              </h2>
+              <div
+                [ngClass]="{'accordion-collapse': true, 'collapse': !isCollapsed(prueba.idPrueba), 'show': isCollapsed(prueba.idPrueba)}">
+                <div class="accordion-body">
+                  <!-- Usamos la clase grid de Bootstrap para el layout de los items -->
+                  <div class="row">
+                    <div class="col-12 col-md-6 mb-3" *ngFor="let item of prueba.items">
+                      <div class="card">
+                        <div class="card-body">
+                          <strong>{{ item.descripcion }}</strong>
+                          <ul class="mt-2">
+                            <li><strong>Peso:</strong> {{ item.peso }}</li>
+                            <li><strong>Grados de Consecucción:</strong> {{ item.gradosConsecucion }}</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="modal fade" id="evaluarParticipanteModal" tabindex="-1" aria-labelledby="modalEvaluarLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content shadow-lg">
+
+                <!-- CABECERA -->
+                <div class="modal-header bg-primary text-white">
+                  <h5 class="modal-title fw-bold" id="modalEvaluarLabel">
+                    Evaluar: {{ pruebaSeleccionada?.enunciado }}
+                  </h5>
+                  <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+                </div>
+
+                <!-- CUERPO -->
+                <div class="modal-body">
+
+                  <!-- PRIMERA PARTE (Antes de Evaluar) -->
+                  <div *ngIf="!evaluando">
+                    <div class="row">
+                      <!-- Información del Participante -->
+                      <div class="col-md-12">
+                        <div class="card border-primary mb-3">
+                          <div class="card-body">
+                            <h5 class="card-title text-primary">
+                              {{ participanteSeleccionado?.nombre }} {{ participanteSeleccionado?.apellidos }}
+                            </h5>
+                            <p class="card-text"><strong>Centro:</strong> {{ participanteSeleccionado?.centro }}</p>
+                            <p class="card-text"><strong>Especialidad:</strong> {{
+                              participanteSeleccionado?.especialidad?.nombre }}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Campo de Nota Final (Solo Lectura) -->
+                    <div class="row">
+                      <div class="col-md-6 mx-auto">
+                        <div class="mb-3 text-center">
+                          <label for="notaFinal" class="form-label fw-bold">Nota Final</label>
+                          <input type="text" class="form-control form-control-lg text-center" id="notaFinal"
+                            [value]="notaFinal !== null ? notaFinal : 'Sin calificar'" readonly>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- SEGUNDA PARTE (Cuando se pulsa "Evaluar") -->
+                  <div *ngIf="evaluando">
+                    <form>
+                      <table class="table table-bordered">
+                        <thead>
+                          <tr>
+                            <th scope="col">Descripción</th>
+                            <th scope="col">Grados de Consecucción</th>
+                            <th scope="col">Comentario</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let item of pruebaSeleccionada?.items; let i = index">
+                            <td><strong>{{ item.descripcion }}</strong></td>
+                            <td>
+                              <div class="grado-selector">
+                                <div *ngFor="let grado of generarRango(item.gradosConsecucion)" class="grado-option">
+                                  <input type="radio" [id]="'grado-' + i + '-' + grado"
+                                    [(ngModel)]="item.gradoSeleccionado" [value]="grado" [name]="'grado-' + i">
+                                  <label [for]="'grado-' + i + '-' + grado" class="grado-label">{{ grado }}</label>
+                                </div>
+                              </div>
+                            </td>
+                            <td>
+                              <textarea class="form-control" rows="3" [(ngModel)]="item.comentario"
+                                name="comentario-{{ i }}"></textarea>
+                            </td>
+                            <td>{{ item.peso }}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </form>
+                  </div>
+
+                </div>
+
+                <!-- PIE DEL MODAL -->
+                <div class="modal-footer d-flex justify-content-between">
+                  <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="resetEvaluacion()">
+                    ❌ Cerrar
+                  </button>
+
+                  <!-- Alternar entre "Evaluar" y "Guardar Evaluación" -->
+                  <button *ngIf="!evaluando" type="button" class="btn btn-success fw-bold" (click)="evaluando = true">
+                    ✅ Evaluar
+                  </button>
+                  <button *ngIf="evaluando" type="button" class="btn btn-success fw-bold" (click)="guardarEvaluacion()">
+                    💾 Guardar Evaluación
+                  </button>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+
+
+
+
+          <!-- Mostrar participantes con la misma especialidad -->
+          <div *ngIf="listaParticipantes && listaParticipantes.length > 0" class="mt-4">
+            <h4>Participantes</h4>
+            <ul class="list-group">
+              <li class="list-group-item d-flex justify-content-between align-items-center"
+                *ngFor="let participante of listaParticipantes">
+                <span><strong>Nombre:</strong> {{ participante.nombre + ' ' + participante.apellidos }}</span>
+                <button class="btn btn-primary btn-sm" (click)="seleccionarParticipante(participante, prueba)">
+                  Crear Evaluación
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+
+
+
+
+  <!-- Mensaje si no se encuentran pruebas -->
+  <div *ngIf="pruebas.length === 0" class="alert alert-info shadow-sm rounded">
+    No se han encontrado pruebas.
+  </div>
+</div>

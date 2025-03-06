@@ -1,0 +1,60 @@
+<div class="container mt-4">
+    <div class="row">
+      <div class="col-12">
+        <h2 class="mb-4">Listado de Especialidades</h2>
+  
+        <!-- Botón para abrir modal de nueva especialidad -->
+        <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#modalEspecialidad">
+          Agregar Nueva Especialidad
+        </button>
+  
+        <!-- Tabla de especialidades -->
+        <div class="table-responsive">
+          <table class="table table-striped table-bordered">
+            <thead class="table-dark">
+              <tr>
+                <th>Código</th>
+                <th>Nombre</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let esp of especialidades">
+                <td>{{ esp.codigo }}</td>
+                <td>{{ esp.nombre }}</td>
+                <td>
+                  <button class="btn btn-danger btn-sm" (click)="eliminarEspecialidad(esp.codigo)">Eliminar</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Modal para agregar especialidad -->
+  <div class="modal fade" id="modalEspecialidad" tabindex="-1" aria-labelledby="modalEspecialidadLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalEspecialidadLabel">Agregar Nueva Especialidad</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form #especialidadForm="ngForm" (ngSubmit)="agregarEspecialidad()">
+            <div class="mb-3">
+              <label for="codigo" class="form-label">Código</label>
+              <input type="text" class="form-control" id="codigo" [(ngModel)]="nuevaEspecialidad.codigo" name="codigo" required>
+            </div>
+            <div class="mb-3">
+              <label for="nombre" class="form-label">Nombre</label>
+              <input type="text" class="form-control" id="nombre" [(ngModel)]="nuevaEspecialidad.nombre" name="nombre" required>
+            </div>
+            <button type="submit" class="btn btn-success">Crear Especialidad</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  

@@ -1,0 +1,30 @@
+<div *ngIf="evaluaciones.length > 0; else noEvaluaciones">
+    <table class="table table-striped table-bordered table-hover">
+      <thead class="table-dark">
+        <tr>
+          <th>ID Evaluación</th>
+          <th>Participante ID</th>
+          <th>Evaluador ID</th>
+          <th>Prueba ID</th>
+          <th>Nota Final</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let evaluacion of evaluaciones">
+          <td>{{ evaluacion.idEvaluacion }}</td>
+          <td>{{ evaluacion.participanteId }}</td>
+          <td>{{ evaluacion.evaluadorId }}</td>
+          <td>{{ evaluacion.pruebaId }}</td>
+          <td>{{ evaluacion.notaFinal }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <!-- Si no hay evaluaciones -->
+  <ng-template #noEvaluaciones>
+    <div class="alert alert-info" role="alert">
+      No hay evaluaciones disponibles.
+    </div>
+  </ng-template>
+  

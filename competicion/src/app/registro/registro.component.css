@@ -1,0 +1,48 @@
+/* Estilo para el contenedor del formulario */
+.login-container {
+    max-width: 400px;  /* Establece un máximo de ancho más estrecho */
+    margin: 0 auto;  /* Centra el contenedor horizontalmente */
+    padding: 20px;
+    background-color: #fff;  /* Fondo blanco */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);  /* Sombra suave */
+}
+
+/* Título del formulario */
+.login-container h2 {
+    font-size: 1.8rem;
+    color: #333;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+/* Ajuste de los campos del formulario */
+.form-group {
+    margin-bottom: 15px; /* Reduce el espacio entre los campos */
+}
+
+.form-control {
+    padding: 10px;  /* Ajusta el tamaño del padding */
+    font-size: 1rem;  /* Tamaño de texto ligeramente mayor */
+    border-radius: 5px;  /* Bordes redondeados */
+    border: 1px solid #ccc;  /* Borde más suave */
+}
+
+/* Botón de registrar */
+.btn-block {
+    padding: 12px;
+    font-size: 1.1rem;
+    border-radius: 5px;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+/* Ajustes de hover para los botones */
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #004085;
+}

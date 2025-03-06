@@ -1,0 +1,101 @@
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-12">
+      <h2 class="mb-4">Lista de Participantes</h2>
+
+      <!-- Contenedor de la tabla -->
+      <div class="table-responsive">
+        <table class="table table-striped table-bordered">
+          <thead class="table-dark">
+            <tr>
+              <th>Nombre</th>
+              <th>Apellidos</th>
+              <th>Email</th>
+              <th>Centro</th>
+              <th>Especialidad</th>
+              <!-- Eliminar columna de acciones -->
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let participante of participantesPaginados">
+              <td>{{ participante.nombre }}</td>
+              <td>{{ participante.apellidos }}</td>
+              <td>{{ participante.email }}</td>
+              <td>{{ participante.centro }}</td>
+              <td>{{ participante.especialidad }}</td>
+              <!-- Eliminar columna de acciones -->
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Modal de modificación con Bootstrap -->
+      <div class="modal fade" id="modalModificar" tabindex="-1" aria-labelledby="modalModificarLabel" aria-hidden="true"
+      *ngIf="mostrarModal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="modalModificarLabel">Modificar Participante</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"
+                (click)="cerrarModal()"></button>
+            </div>
+            <div class="modal-body">
+              <form (ngSubmit)="modificarParticipante()">
+                <div class="mb-3">
+                  <label for="nombre" class="form-label">Nombre:</label>
+                  <input type="text" id="nombre" [(ngModel)]="participante.nombre" name="nombre" class="form-control" required />
+                </div>
+
+                <div class="mb-3">
+                  <label for="apellidos" class="form-label">Apellidos:</label>
+                  <input type="text" id="apellidos" [(ngModel)]="participante.apellidos" name="apellidos" class="form-control"
+                    required />
+                </div>
+
+                <div class="mb-3">
+                  <label for="username" class="form-label">Email:</label>
+                  <input type="text" id="email" [(ngModel)]="participante.email" name="email" class="form-control"
+                    required />
+                </div>
+
+                <div class="mb-3">
+                  <label for="dni" class="form-label">Centro:</label>
+                  <input type="text" id="centro" [(ngModel)]="participante.centro" name="centro" class="form-control" required />
+                </div>
+
+                <div class="mb-3">
+                  <label for="especialidad" class="form-label">Especialidad:</label>
+                  <select id="especialidad" [(ngModel)]="participante.nombreEspecialidad"  name="especialidad" class="form-select"
+                    required>
+                    <option *ngFor="let especialidad of especialidades" [ngValue]="especialidad.nombre">
+                      {{ especialidad.nombre }}
+                    </option>
+                  </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Modificar</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Paginación -->
+      <div class="d-flex justify-content-center mt-3">
+        <button 
+          class="btn btn-outline-primary btn-sm me-2"
+          [disabled]="paginaActual === 1"
+          (click)="cambiarPagina(paginaActual - 1)">
+          Anterior
+        </button>
+        <span class="mx-2">Página {{ paginaActual }} de {{ totalPaginas }}</span>
+        <button 
+          class="btn btn-outline-primary btn-sm ms-2"
+          [disabled]="paginaActual === totalPaginas"
+          (click)="cambiarPagina(paginaActual + 1)">
+          Siguiente
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

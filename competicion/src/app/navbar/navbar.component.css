@@ -1,0 +1,56 @@
+/* Alinear todos los elementos del menú de admin a la izquierda */
+.navbar-nav {
+    margin-left: 0; /* Resetear margen */
+    justify-content: flex-start; /* Alineación a la izquierda */
+}
+
+/* Aumentar el espacio entre los elementos del menú */
+.navbar-nav .nav-item {
+    margin-right: 30px; /* Espacio entre los ítems */
+}
+
+/* Estilos para los menús desplegables */
+.navbar-nav .dropdown-menu {
+    background-color: #0D6EFD; /* Fondo azul */
+}
+
+/* Estilo para los elementos dentro del dropdown */
+.navbar-nav .dropdown-menu .dropdown-item {
+    color: white; /* Texto blanco */
+}
+
+/* Hover sobre los items dentro del dropdown */
+.navbar-nav .dropdown-menu .dropdown-item:hover {
+    background-color: #0A58CA; /* Color más oscuro */
+}
+
+/* Estilo para el botón de login/logout */
+.navbar-nav .btn-outline-light {
+    border-color: white;
+    color: white;
+}
+
+/* Hover sobre el botón de login/logout */
+.navbar-nav .btn-outline-light:hover {
+    background-color: white;
+    color: #0D6EFD; 
+}
+
+/* Alinear Login/Logout a la derecha */
+.d-flex.ms-auto {
+    margin-left: auto; /* Mueve Login/Logout a la derecha */
+}
+
+/* Cambiar colores del botón seleccionado */
+.navbar-nav .btn.active {
+    background-color: white;
+    color: #0D6EFD; /* Color principal */
+    border-color: white;
+}
+
+.active {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
